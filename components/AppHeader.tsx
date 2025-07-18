@@ -4,33 +4,39 @@ import Link from 'next/link'
 
 export function AppHeader() {
   return (
-    <header className="border-b border-gray-100/50 bg-white/90 backdrop-blur-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
+    <header className="border-b border-gray-200 bg-white/90 backdrop-blur-sm sticky top-0 z-50 transition-smooth">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-3 lg:space-x-4 group">
-            <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gray-900 rounded-full flex items-center justify-center shadow-zen transition-zen group-hover:shadow-zen-md group-hover:scale-105">
-              <span className="text-white text-sm lg:text-base font-light">決</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-zen-heading text-base lg:text-lg tracking-widest">Decision Compass</span>
-              <span className="text-zen-small opacity-60 -mt-1 hidden sm:block">決策指南針</span>
-            </div>
+          {/* Back to Landing Page with Smooth Animation */}
+          <Link href="/" className="flex items-center space-x-3 text-gray-600 hover:text-gray-900 transition-smooth px-3 py-2 rounded-md hover:bg-gray-50 group">
+            <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            <span className="text-sm font-medium">返回首页</span>
           </Link>
-          
-          <div className="flex items-center space-x-4 lg:space-x-8">
+
+          {/* App Title with Subtle Animation */}
+          <div className="text-center animate-fade-in">
+            <h1 className="text-lg font-light text-gray-900 hover:text-gray-700 transition-smooth">Decision Compass</h1>
+            <p className="text-xs text-gray-500">决策指南针</p>
+          </div>
+
+          {/* Right Side Actions with Hover Effects */}
+          <div className="flex items-center space-x-4">
+            <Link
+              href="/docs"
+              className="text-sm text-gray-500 hover:text-gray-700 transition-smooth px-3 py-2 rounded-md hover:bg-gray-50"
+            >
+              文档
+            </Link>
             <Link
               href="/app/history"
-              className="text-zen-body hover:text-zen-ink transition-zen text-sm tracking-wide focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 rounded px-2 py-1"
+              className="text-sm text-gray-600 hover:text-gray-900 transition-smooth px-3 py-2 rounded-md hover:bg-gray-50 group"
             >
-              歷史記錄
+              <span className="group-hover:translate-x-1 transition-transform duration-200 inline-block">
+                历史记录
+              </span>
             </Link>
-            <div className="w-px h-4 bg-gray-200 hidden sm:block"></div>
-            <button className="text-zen-body hover:text-zen-ink transition-zen text-sm tracking-wide hidden sm:block">
-              設定
-            </button>
-            <button className="btn-zen text-sm tracking-wide px-4 lg:px-6">
-              登入
-            </button>
           </div>
         </div>
       </div>

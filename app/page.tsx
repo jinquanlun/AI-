@@ -2,263 +2,152 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { CompassIcon } from '@/components/CompassIcon'
 
 export default function LandingPage() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     setIsVisible(true)
-    
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
-    
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 overflow-hidden">
-      {/* Zen mouse-following element */}
-      <div 
-        className="fixed w-2 h-2 pointer-events-none transition-all duration-1000 ease-out opacity-10 animate-zen-breathe"
-        style={{
-          left: mousePosition.x - 4,
-          top: mousePosition.y - 4,
-          background: `radial-gradient(circle, var(--zen-charcoal) 0%, transparent 70%)`,
-          borderRadius: '50%',
-          transform: 'translate(-50%, -50%)'
-        }}
-      />
-
-      {/* Navigation - Enhanced zen design */}
-      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100/50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4 lg:py-6">
+    <div className="min-h-screen bg-white text-gray-900">
+      {/* Navigation - Ultra Simple with Smooth Animations */}
+      <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100 transition-smooth">
+        <div className="max-w-6xl mx-auto px-8 py-6">
           <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-3 lg:space-x-4">
-              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gray-900 rounded-full flex items-center justify-center shadow-zen transition-zen hover:shadow-zen-md">
-                <span className="text-white text-sm lg:text-base font-light">決</span>
-              </div>
-              <span className="font-light text-lg lg:text-xl tracking-widest text-zen-body">Decision Compass</span>
+            <span className="text-lg font-light transition-smooth hover:text-gray-600">Decision Compass</span>
+            <div className="flex items-center space-x-4">
+              <Link
+                href="/docs"
+                className="text-gray-500 hover:text-gray-700 transition-smooth px-3 py-2 rounded-md hover:bg-gray-50 text-sm"
+              >
+                文档
+              </Link>
+              <Link
+                href="/app"
+                className="text-gray-600 hover:text-gray-900 transition-smooth px-4 py-2 rounded-md hover:bg-gray-50 group"
+              >
+                <span className="group-hover:translate-x-1 transition-transform duration-200 inline-block">
+                  开始使用
+                </span>
+              </Link>
             </div>
-            
-            <Link 
-              href="/app"
-              className="btn-zen tracking-widest text-sm hover:tracking-wider transition-all duration-500"
-            >
-              開始使用
-            </Link>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section - Extreme zen minimalism */}
-      <section className="min-h-screen flex items-center justify-center relative px-4 sm:px-8 pt-28 sm:pt-32 lg:pt-24">
-        <div className="max-w-5xl mx-auto text-center">
-          {/* Main heading with enhanced zen styling */}
-          <div className={`transition-zen-slow ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-extralight mb-16 lg:mb-20 leading-none tracking-wider">
-              <span className="block mb-6 lg:mb-8 text-gray-700 font-light">決策</span>
-              <span className="block text-gray-900 font-light">指南針</span>
-            </h1>
-          </div>
+      {/* Hero Section - Ultra Simple with Smooth Animations */}
+      <section className="min-h-screen flex items-center justify-center relative px-8 pt-32">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Main title - Clean and simple with staggered animation */}
+          <h1 className={`text-6xl lg:text-8xl font-light leading-tight mb-12 lg:mb-16 transition-smooth-slow ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <span className={`block mb-4 text-gray-700 transition-smooth-slow delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>决策</span>
+            <span className={`block text-gray-900 transition-smooth-slow delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>指南针</span>
+          </h1>
 
-          {/* Compass visual */}
-          <div className={`transition-zen-slow delay-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-            <div className="flex justify-center mb-8 lg:mb-12">
-              <CompassIcon size={72} className="animate-zen-breathe lg:scale-110" />
-            </div>
-          </div>
-
-          {/* Zen divider */}
-          <div className={`transition-zen-slow delay-700 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-            <div className="w-20 lg:w-24 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mx-auto mb-12 lg:mb-16"></div>
-          </div>
-
-          {/* Subtitle with zen typography */}
-          <div className={`transition-zen-slow delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <p className="text-gray-700 text-lg lg:text-xl mb-4 lg:mb-6 max-w-2xl mx-auto leading-relaxed font-medium">
-              從直觀決策到結構化思考
+          {/* Subtitle with Philosophy */}
+          <div className={`mb-12 lg:mb-16 max-w-3xl mx-auto transition-smooth-slow delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <p className="text-lg lg:text-xl text-gray-600 mb-8 leading-relaxed">
+              从直观决策到结构化思考
             </p>
-            <p className="text-gray-600 text-sm lg:text-base mb-16 lg:mb-24 max-w-xl mx-auto leading-relaxed">
-              AI驅動的決策支持工具，為一人公司與自由創作者而設計
+            <p className="text-base text-gray-500 leading-relaxed italic">
+              "每个选择都是一次与未来的对话，每个决定都是一次对自我的探索"
             </p>
           </div>
 
-          {/* CTA with zen button styling */}
-          <div className={`transition-zen-slow delay-1500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <Link 
+          {/* CTA Button with Hover Effects */}
+          <div className={`transition-smooth-slow delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <Link
               href="/app"
-              className="inline-block px-16 py-5 bg-gray-900 text-white hover:bg-gray-800 transition-zen text-sm tracking-widest font-light border-0 shadow-zen-md hover:shadow-zen-lg hover:transform hover:scale-105"
+              className="inline-block px-8 py-4 bg-gray-900 text-white hover:bg-gray-800 transition-smooth hover-lift text-base font-normal group"
             >
-              開始您的決策之旅
+              <span className="group-hover:translate-x-1 transition-transform duration-200 inline-block">
+                开始您的决策之旅
+              </span>
             </Link>
-          </div>
-        </div>
-
-        {/* Enhanced zen geometric element */}
-        <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 opacity-30">
-          <div className="flex flex-col items-center space-y-4">
-            <div className="w-px h-20 bg-gradient-to-b from-gray-300 to-transparent"></div>
-            <div className="w-1 h-1 bg-gray-400 rounded-full animate-zen-breathe"></div>
           </div>
         </div>
       </section>
 
-      {/* Philosophy Section - Enhanced zen design with visual elements */}
-      <section className="py-32 lg:py-40 bg-gradient-to-b from-white via-gray-50/30 to-white relative overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-20 left-1/4 w-32 h-32 border border-gray-300 rounded-full"></div>
-          <div className="absolute bottom-20 right-1/4 w-24 h-24 border border-gray-300 rounded-full"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-40 bg-gray-300"></div>
-        </div>
 
-        <div className="max-w-6xl mx-auto px-6 lg:px-12 relative">
-          <div className="text-center">
-            {/* Decorative compass element */}
-            <div className="flex justify-center mb-12 animate-zen-fadeIn">
-              <div className="relative">
-                <CompassIcon size={60} className="opacity-60 animate-zen-breathe" />
-                <div className="absolute -top-2 -right-2 w-4 h-4 bg-blue-500 rounded-full opacity-70 animate-pulse"></div>
-              </div>
-            </div>
 
-            {/* Enhanced heading with better typography */}
-            <h2 className="text-4xl lg:text-5xl xl:text-6xl font-light text-gray-900 mb-16 lg:mb-20 leading-tight animate-zen-fadeIn">
-              <span className="block mb-4 text-gray-800">在複雜的世界中</span>
-              <span className="block text-gray-900 font-medium">尋找簡單的答案</span>
+      {/* Philosophy Section - Thoughtful Content */}
+      <section className="py-20 lg:py-24 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-2xl lg:text-3xl font-light text-gray-900 mb-8 leading-relaxed">
+              在复杂的世界中寻找简单的答案
             </h2>
 
-            {/* Content with better visual hierarchy */}
-            <div className="max-w-4xl mx-auto space-y-12 lg:space-y-16 animate-zen-slideIn">
-              <div className="relative">
-                <p className="text-xl lg:text-2xl text-gray-700 leading-relaxed font-medium mb-8">
-                  每個決策都是一次對話。與自己，與可能性，與未來。
-                </p>
-
-                {/* Decorative divider */}
-                <div className="flex items-center justify-center my-12">
-                  <div className="w-8 h-px bg-gray-300"></div>
-                  <div className="mx-4 w-2 h-2 bg-gray-400 rounded-full"></div>
-                  <div className="w-8 h-px bg-gray-300"></div>
-                </div>
-
-                <p className="text-lg lg:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-                  Decision Compass 不是要替你做決定，而是要幫你看清楚自己的想法，
-                  <br className="hidden lg:block" />
-                  將模糊的直覺轉化為清晰的選擇。
-                </p>
-              </div>
-
-              {/* Call to action hint */}
-              <div className="pt-8">
-                <div className="inline-flex items-center space-x-2 text-gray-500 text-sm">
-                  <span>向下滾動探索更多</span>
-                  <svg className="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section - Enhanced visual design */}
-      <section className="py-32 lg:py-40 bg-gradient-to-b from-white to-gray-50/50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-24">
-            {/* Feature 1 - Enhanced design */}
-            <div className="text-center group relative">
-              <div className="relative mb-8">
-                <div className="w-24 h-24 mx-auto bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:transform group-hover:scale-105 group-hover:rotate-3">
-                  <span className="text-4xl text-blue-600">✍️</span>
-                </div>
-                <div className="absolute -top-2 -right-2 w-6 h-6 bg-blue-500 rounded-full opacity-20 animate-pulse"></div>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">自由記錄</h3>
-              <div className="space-y-2 text-gray-600">
-                <p className="leading-relaxed">想到什麼就寫什麼</p>
-                <p className="leading-relaxed">不需要格式，不需要結構</p>
-                <p className="leading-relaxed font-medium text-gray-700">只需要誠實的表達</p>
-              </div>
-            </div>
-
-            {/* Feature 2 - Enhanced design */}
-            <div className="text-center group relative">
-              <div className="relative mb-8">
-                <div className="w-24 h-24 mx-auto bg-gradient-to-br from-green-50 to-green-100 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:transform group-hover:scale-105 group-hover:-rotate-3">
-                  <span className="text-4xl text-green-600">🧠</span>
-                </div>
-                <div className="absolute -top-2 -left-2 w-6 h-6 bg-green-500 rounded-full opacity-20 animate-pulse"></div>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">AI 分析</h3>
-              <div className="space-y-2 text-gray-600">
-                <p className="leading-relaxed">深度理解你的想法</p>
-                <p className="leading-relaxed">生成結構化的選擇</p>
-                <p className="leading-relaxed font-medium text-gray-700">每個方案都有其邏輯</p>
-              </div>
-            </div>
-
-            {/* Feature 3 - Enhanced design */}
-            <div className="text-center md:col-span-2 lg:col-span-1 group relative">
-              <div className="relative mb-8">
-                <div className="w-24 h-24 mx-auto bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl flex items-center justify-center shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:transform group-hover:scale-105 group-hover:rotate-3">
-                  <span className="text-4xl text-purple-600">📊</span>
-                </div>
-                <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-purple-500 rounded-full opacity-20 animate-pulse"></div>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">決策追蹤</h3>
-              <div className="space-y-2 text-gray-600">
-                <p className="leading-relaxed">記錄每個選擇</p>
-                <p className="leading-relaxed">追蹤每個結果</p>
-                <p className="leading-relaxed font-medium text-gray-700">學習每個教訓</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section - Enhanced zen-like simplicity */}
-      <section className="py-40 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
-        <div className="max-w-4xl mx-auto px-12 text-center">
-          <h2 className="text-5xl md:text-6xl font-extralight mb-20 leading-relaxed">
-            開始您的<br/>
-            決策修練
-          </h2>
-          
-          <div className="space-y-12">
-            <Link 
-              href="/app"
-              className="inline-block px-16 py-5 border border-white/30 text-white hover:bg-white hover:text-gray-900 transition-zen text-sm tracking-widest font-light shadow-zen-md hover:shadow-zen-lg backdrop-blur-sm"
-            >
-              立即體驗
-            </Link>
-            
-            <p className="text-gray-400 text-sm font-light tracking-wide">
-              無需註冊，立即開始
+            <p className="text-base lg:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
+              AI驱动的决策支持工具，为一人公司与自由创作者而设计
             </p>
           </div>
+
+          {/* Philosophy Quotes with Staggered Animation */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+            <div className="space-y-6 animate-slide-in-left">
+              <blockquote className="text-gray-700 leading-relaxed p-6 border-l-2 border-gray-200 hover:border-gray-400 transition-smooth hover-lift">
+                <p className="mb-4">"决策不是关于找到完美的答案，而是关于理解自己真正想要什么。"</p>
+                <footer className="text-sm text-gray-500">— 决策心理学</footer>
+              </blockquote>
+
+              <div className="text-sm text-gray-600 leading-relaxed p-4 rounded-lg hover:bg-gray-50 transition-smooth">
+                <p>每个人都有直觉，但很少人知道如何倾听它。Decision Compass 帮助你将模糊的感受转化为清晰的选择。</p>
+              </div>
+            </div>
+
+            <div className="space-y-6 animate-slide-in-right">
+              <blockquote className="text-gray-700 leading-relaxed p-6 border-l-2 border-gray-200 hover:border-gray-400 transition-smooth hover-lift">
+                <p className="mb-4">"最好的决策来自于对自己诚实，而不是对他人的期待。"</p>
+                <footer className="text-sm text-gray-500">— 自我认知理论</footer>
+              </blockquote>
+
+              <div className="text-sm text-gray-600 leading-relaxed p-4 rounded-lg hover:bg-gray-50 transition-smooth">
+                <p>在信息爆炸的时代，我们需要的不是更多选择，而是更好的判断。让AI成为你思考的伙伴，而非替代。</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Footer - Enhanced zen minimal */}
-      <footer className="py-24 bg-gradient-to-t from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-12">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-4">
-              <div className="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center shadow-zen transition-zen hover:shadow-zen-md">
-                <span className="text-white text-sm font-light">決</span>
-              </div>
-              <span className="font-light text-zen-body tracking-wider">Decision Compass</span>
+      {/* Core Principles - Simple */}
+      <section className="py-16 lg:py-20 bg-white">
+        <div className="max-w-3xl mx-auto px-8 text-center">
+          <h3 className="text-xl lg:text-2xl font-light text-gray-900 mb-12">核心理念</h3>
+
+          <div className="space-y-8">
+            <div className="p-6 rounded-lg hover:bg-gray-50 transition-smooth hover-lift cursor-default group">
+              <h4 className="text-base font-medium text-gray-900 mb-3 group-hover:text-gray-700 transition-smooth">自由表达</h4>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                不需要完美的逻辑，只需要真实的想法。让思绪自然流淌，AI会帮你整理。
+              </p>
             </div>
-            
-            <p className="text-zen-small tracking-wide">
-              © 2025 — 為思考而設計
-            </p>
+
+            <div className="p-6 rounded-lg hover:bg-gray-50 transition-smooth hover-lift cursor-default group">
+              <h4 className="text-base font-medium text-gray-900 mb-3 group-hover:text-gray-700 transition-smooth">结构化思考</h4>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                将复杂的情感和直觉转化为可分析的选项，让决策过程更加透明。
+              </p>
+            </div>
+
+            <div className="p-6 rounded-lg hover:bg-gray-50 transition-smooth hover-lift cursor-default group">
+              <h4 className="text-base font-medium text-gray-900 mb-3 group-hover:text-gray-700 transition-smooth">持续学习</h4>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                每个决策都是一次学习机会。记录、反思、成长，建立属于你的决策智慧。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer - Simple */}
+      <footer className="py-12 bg-gray-50 border-t border-gray-100">
+        <div className="max-w-6xl mx-auto px-8">
+          <div className="flex justify-between items-center text-sm text-gray-500">
+            <span>Decision Compass</span>
+            <span>© 2025 — 为思考而设计</span>
           </div>
         </div>
       </footer>

@@ -82,26 +82,27 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50/30 to-gray-100/20">
+    <div className="min-h-screen bg-white">
       <AppHeader />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 min-h-[calc(100vh-8rem)] lg:h-[calc(100vh-10rem)]">
-          {/* Left Panel - Decision Input with enhanced zen design */}
-          <div className="lg:col-span-5 card-zen flex flex-col shadow-zen-md order-1 lg:order-1">
-            <div className="border-b border-gray-100/50 pb-6 mb-6">
-              <h2 className="text-xl lg:text-2xl font-semibold text-gray-900 mb-2">
-                記錄你的想法
+
+      {/* Clean Layout with Smooth Animations */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8 lg:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 min-h-[calc(100vh-8rem)]">
+          {/* Left Panel - Decision Input with Animation */}
+          <div className="lg:col-span-5 bg-white border border-gray-200 p-6 lg:p-8 flex flex-col hover-lift transition-smooth animate-slide-in-left">
+            <div className="mb-8">
+              <h2 className="text-xl lg:text-2xl font-medium text-gray-900 mb-2 animate-fade-in">
+                记录你的想法
               </h2>
-              <p className="text-sm lg:text-base text-gray-600">
-                自由表達，無需結構
+              <p className="text-gray-600 animate-fade-in">
+                自由表达，无需结构
               </p>
             </div>
 
             {/* AI Model Selector */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                選擇AI模型
+                选择AI模型
               </label>
               <ModelSelector
                 selectedModel={selectedModel}
@@ -109,6 +110,7 @@ export default function App() {
                 disabled={isGenerating}
               />
             </div>
+
             <div className="flex-1">
               <DecisionInput
                 content={inputContent}
@@ -119,22 +121,22 @@ export default function App() {
             </div>
           </div>
 
-          {/* Right Panel - AI Choice Cards with zen spacing */}
-          <div className="lg:col-span-7 card-zen flex flex-col relative shadow-zen-md order-2 lg:order-2">
-            <div className="border-b border-gray-100/50 pb-6 mb-6 relative">
-              <h2 className="text-xl lg:text-2xl font-semibold text-gray-900 mb-2">
-                AI 為你生成選擇
+          {/* Right Panel - AI Choice Display with Animation */}
+          <div className="lg:col-span-7 bg-white border border-gray-200 p-6 lg:p-8 flex flex-col hover-lift transition-smooth animate-slide-in-right">
+            <div className="mb-8 relative">
+              <h2 className="text-xl lg:text-2xl font-medium text-gray-900 mb-2 animate-fade-in">
+                AI 为你生成选择
               </h2>
-              <p className="text-sm lg:text-base text-gray-600">
-                結構化的決策建議
+              <p className="text-gray-600 animate-fade-in">
+                结构化的决策建议
               </p>
               {selectedOption !== null && !isUpdating && (
-                <div className="absolute top-0 right-0 bg-green-50 text-green-800 px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs font-medium shadow-zen animate-zen-fadeIn border border-green-200">
-                  ✓ 已選擇方案 {String.fromCharCode(65 + selectedOption)}
+                <div className="absolute top-0 right-0 text-green-600 text-sm animate-scale-in">
+                  ✓ 已选择方案 {String.fromCharCode(65 + selectedOption)}
                 </div>
               )}
             </div>
-            <div className="flex-1 overflow-hidden">
+            <div className="flex-1">
               <AIChoicePanel
                 options={aiOptions}
                 selectedOption={selectedOption}

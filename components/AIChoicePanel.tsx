@@ -17,13 +17,13 @@ export function AIChoicePanel({
 }: AIChoicePanelProps) {
   if (isGenerating) {
     return (
-      <div className="flex items-center justify-center h-full p-8">
+      <div className="flex items-center justify-center h-full p-8 animate-fade-in">
         <div className="text-center">
-          <div className="w-12 h-12 mx-auto mb-8 relative">
+          <div className="w-12 h-12 mx-auto mb-8 relative animate-scale-in">
             <div className="absolute inset-0 rounded-full border-2 border-gray-200"></div>
             <div className="absolute inset-0 rounded-full border-2 border-gray-900 border-t-transparent animate-spin"></div>
           </div>
-          <p className="text-zen-body opacity-80 animate-zen-breathe">AI正在分析你的想法...</p>
+          <p className="text-base opacity-80 animate-pulse-gentle">AI正在分析你的想法...</p>
         </div>
       </div>
     )
@@ -31,18 +31,18 @@ export function AIChoicePanel({
 
   if (options.length === 0) {
     return (
-      <div className="flex items-center justify-center h-full p-8">
+      <div className="flex items-center justify-center h-full p-8 animate-fade-in">
         <div className="text-center opacity-60">
-          <div className="text-7xl mb-8 opacity-30">🤔</div>
-          <p className="text-zen-body mb-4">在左側輸入你的想法</p>
-          <p className="text-zen-small opacity-70">AI會為你生成結構化的選擇建議</p>
+          <div className="text-7xl mb-8 opacity-30 animate-pulse-gentle">🤔</div>
+          <p className="text-base mb-4">在左侧输入你的想法</p>
+          <p className="text-sm opacity-70">AI会为你生成结构化的选择建议</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="h-full overflow-y-auto p-4 lg:p-6 scrollbar-zen">
+    <div className="h-full overflow-y-auto p-4 lg:p-6">
       <div className="space-y-6 lg:space-y-8 pb-8">
         {options.map((option, index) => (
           <ChoiceCard
@@ -90,11 +90,11 @@ function ChoiceCard({ option, index, isSelected, onSelect }: ChoiceCardProps) {
   const getRiskText = (risk: string) => {
     switch (risk) {
       case 'low':
-        return '低風險'
+        return '低风险'
       case 'medium':
-        return '中風險'
+        return '中风险'
       case 'high':
-        return '高風險'
+        return '高风险'
       default:
         return '未知'
     }
@@ -116,10 +116,10 @@ function ChoiceCard({ option, index, isSelected, onSelect }: ChoiceCardProps) {
 
   return (
     <div
-      className={`card-zen cursor-pointer transition-zen group hover-lift ${
+      className={`p-6 border border-gray-200 rounded-lg cursor-pointer transition-smooth group hover-lift animate-fade-in ${
         isSelected
-          ? 'border-gray-900 bg-gray-50 shadow-zen-lg transform scale-[1.02] animate-zen-bounce'
-          : 'hover:border-gray-300 hover:shadow-zen-md focus-within:border-gray-400 focus-within:shadow-zen-md'
+          ? 'border-gray-900 bg-gray-50 shadow-lg transform scale-[1.02] animate-scale-in'
+          : 'hover:border-gray-300 hover:shadow-md focus-within:border-gray-400 focus-within:shadow-md'
       }`}
       onClick={onSelect}
       role="button"
@@ -130,25 +130,25 @@ function ChoiceCard({ option, index, isSelected, onSelect }: ChoiceCardProps) {
           onSelect()
         }
       }}
-      aria-label={`選擇方案 ${String.fromCharCode(65 + index)}: ${option.title}`}
+      aria-label={`选择方案 ${String.fromCharCode(65 + index)}: ${option.title}`}
       aria-pressed={isSelected}
     >
       {/* 头部：策略类型和风险等级 */}
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-6 lg:mb-8 space-y-4 sm:space-y-0">
         <div className="flex items-start space-x-3 lg:space-x-4">
-          <span className="text-2xl lg:text-3xl opacity-80">{getStrategyIcon(strategyType)}</span>
+          <span className="text-2xl lg:text-3xl opacity-80 group-hover:scale-110 transition-transform duration-200">{getStrategyIcon(strategyType)}</span>
           <div className="flex-1">
-            <h3 className="text-lg lg:text-xl font-medium mb-2 text-gray-900">
+            <h3 className="text-lg lg:text-xl font-medium mb-2 text-gray-900 group-hover:text-gray-700 transition-smooth">
               {option.title}
             </h3>
             <p className="text-sm lg:text-base text-gray-600">{strategyType}</p>
           </div>
         </div>
         <div className="flex flex-row sm:flex-col items-start sm:items-end space-x-3 sm:space-x-0 sm:space-y-3">
-          <span className={`px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs border ${getRiskColor(riskLevel)} font-medium`}>
+          <span className={`px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs border ${getRiskColor(riskLevel)} font-medium transition-smooth hover-scale`}>
             {getRiskText(riskLevel)}
           </span>
-          <span className="text-zen-small opacity-60">
+          <span className="text-sm opacity-60">
             成功率: {successProb}
           </span>
         </div>
@@ -157,7 +157,7 @@ function ChoiceCard({ option, index, isSelected, onSelect }: ChoiceCardProps) {
       {/* 核心逻辑 */}
       <div className="mb-8">
         <h4 className="text-zen-small font-medium opacity-70 mb-4 flex items-center">
-          <span className="mr-2">💡</span> 核心邏輯
+          <span className="mr-2">💡</span> 核心逻辑
         </h4>
         <p className="text-zen-body leading-relaxed bg-gray-50/50 p-6 rounded-md border border-gray-100">
           {coreLogic}
