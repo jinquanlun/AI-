@@ -17,10 +17,13 @@ export function AIChoicePanel({
 }: AIChoicePanelProps) {
   if (isGenerating) {
     return (
-      <div className="flex items-center justify-center h-full">
+      <div className="flex items-center justify-center h-full p-8">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">AI正在分析你的想法...</p>
+          <div className="w-12 h-12 mx-auto mb-8 relative">
+            <div className="absolute inset-0 rounded-full border-2 border-gray-200"></div>
+            <div className="absolute inset-0 rounded-full border-2 border-gray-900 border-t-transparent animate-spin"></div>
+          </div>
+          <p className="text-zen-body opacity-80 animate-zen-breathe">AI正在分析你的想法...</p>
         </div>
       </div>
     )
@@ -28,27 +31,37 @@ export function AIChoicePanel({
 
   if (options.length === 0) {
     return (
-      <div className="flex items-center justify-center h-full">
-        <div className="text-center text-gray-500">
-          <div className="text-6xl mb-4">🤔</div>
-          <p className="text-lg mb-2">在左侧输入你的想法</p>
-          <p className="text-sm">AI会为你生成结构化的选择建议</p>
+      <div className="flex items-center justify-center h-full p-8">
+        <div className="text-center opacity-60">
+          <div className="text-7xl mb-8 opacity-30">🤔</div>
+          <p className="text-zen-body mb-4">在左側輸入你的想法</p>
+          <p className="text-zen-small opacity-70">AI會為你生成結構化的選擇建議</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="space-y-4 h-full overflow-y-auto">
-      {options.map((option, index) => (
-        <ChoiceCard
-          key={option.id}
-          option={option}
-          index={index}
-          isSelected={selectedOption === index}
-          onSelect={() => onSelectOption(index)}
-        />
-      ))}
+    <div className="h-full overflow-y-auto p-4 lg:p-6 scrollbar-zen">
+      <div className="space-y-6 lg:space-y-8 pb-8">
+        {options.map((option, index) => (
+          <ChoiceCard
+            key={option.id}
+            option={option}
+            index={index}
+            isSelected={selectedOption === index}
+            onSelect={() => onSelectOption(index)}
+          />
+        ))}
+      </div>
+      {/* 滚动提示 - 仅在有多个选择时显示 */}
+      {options.length > 1 && (
+        <div className="text-center py-4 lg:py-6 text-zen-small opacity-40 border-t border-gray-100/50 mt-6 lg:mt-8 sticky bottom-0 bg-white/90 backdrop-blur-sm">
+          <div className="animate-zen-breathe">
+            ↕ 滾動查看所有選擇
+          </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -64,11 +77,11 @@ function ChoiceCard({ option, index, isSelected, onSelect }: ChoiceCardProps) {
   const getRiskColor = (risk: string) => {
     switch (risk) {
       case 'low':
-        return 'text-green-600 bg-green-50 border-green-200'
+        return 'text-green-700 bg-green-50 border-green-200'
       case 'medium':
-        return 'text-yellow-600 bg-yellow-50 border-yellow-200'
+        return 'text-amber-700 bg-amber-50 border-amber-200'
       case 'high':
-        return 'text-red-600 bg-red-50 border-red-200'
+        return 'text-red-700 bg-red-50 border-red-200'
       default:
         return 'text-gray-600 bg-gray-50 border-gray-200'
     }
@@ -77,11 +90,11 @@ function ChoiceCard({ option, index, isSelected, onSelect }: ChoiceCardProps) {
   const getRiskText = (risk: string) => {
     switch (risk) {
       case 'low':
-        return '低风险'
+        return '低風險'
       case 'medium':
-        return '中风险'
+        return '中風險'
       case 'high':
-        return '高风险'
+        return '高風險'
       default:
         return '未知'
     }
@@ -96,64 +109,80 @@ function ChoiceCard({ option, index, isSelected, onSelect }: ChoiceCardProps) {
   }
 
   // 兼容性处理：支持新旧数据结构
-  const riskLevel = option.risk_analysis?.level || (option as any).risk_level || 'medium'
+  const riskLevel = option.risk_analysis?.level || 'medium'
   const successProb = option.expected_outcomes?.success_probability || '未知'
   const strategyType = option.strategy_type || '决策方案'
   const coreLogic = option.core_logic || option.summary || '暂无详细说明'
 
   return (
     <div
-      className={`border rounded-lg p-6 cursor-pointer transition-all ${
-        isSelected 
-          ? 'border-blue-500 bg-blue-50 shadow-lg' 
-          : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50 hover:shadow-md'
+      className={`card-zen cursor-pointer transition-zen group hover-lift ${
+        isSelected
+          ? 'border-gray-900 bg-gray-50 shadow-zen-lg transform scale-[1.02] animate-zen-bounce'
+          : 'hover:border-gray-300 hover:shadow-zen-md focus-within:border-gray-400 focus-within:shadow-zen-md'
       }`}
       onClick={onSelect}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onSelect()
+        }
+      }}
+      aria-label={`選擇方案 ${String.fromCharCode(65 + index)}: ${option.title}`}
+      aria-pressed={isSelected}
     >
       {/* 头部：策略类型和风险等级 */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center space-x-2">
-          <span className="text-2xl">{getStrategyIcon(strategyType)}</span>
-          <div>
-            <h3 className="font-semibold text-gray-900 text-lg">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-6 lg:mb-8 space-y-4 sm:space-y-0">
+        <div className="flex items-start space-x-3 lg:space-x-4">
+          <span className="text-2xl lg:text-3xl opacity-80">{getStrategyIcon(strategyType)}</span>
+          <div className="flex-1">
+            <h3 className="text-lg lg:text-xl font-medium mb-2 text-gray-900">
               {option.title}
             </h3>
-            <p className="text-sm text-gray-500">{strategyType}</p>
+            <p className="text-sm lg:text-base text-gray-600">{strategyType}</p>
           </div>
         </div>
-        <div className="flex flex-col items-end space-y-1">
-          <span className={`px-3 py-1 rounded-full text-xs border ${getRiskColor(riskLevel)}`}>
+        <div className="flex flex-row sm:flex-col items-start sm:items-end space-x-3 sm:space-x-0 sm:space-y-3">
+          <span className={`px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs border ${getRiskColor(riskLevel)} font-medium`}>
             {getRiskText(riskLevel)}
           </span>
-          <span className="text-xs text-gray-500">
+          <span className="text-zen-small opacity-60">
             成功率: {successProb}
           </span>
         </div>
       </div>
 
       {/* 核心逻辑 */}
-      <div className="mb-4">
-        <h4 className="text-sm font-medium text-gray-700 mb-2">💡 核心逻辑：</h4>
-        <p className="text-sm text-gray-600 bg-gray-50 p-3 rounded-md">
+      <div className="mb-8">
+        <h4 className="text-zen-small font-medium opacity-70 mb-4 flex items-center">
+          <span className="mr-2">💡</span> 核心邏輯
+        </h4>
+        <p className="text-zen-body leading-relaxed bg-gray-50/50 p-6 rounded-md border border-gray-100">
           {coreLogic}
         </p>
       </div>
 
       {/* 行动步骤 */}
-      <div className="mb-4">
-        <h4 className="text-sm font-medium text-gray-700 mb-2">🎯 行动步骤：</h4>
-        <div className="space-y-2">
+      <div className="mb-8">
+        <h4 className="text-zen-small font-medium opacity-70 mb-4 flex items-center">
+          <span className="mr-2">🎯</span> 行動步驟
+        </h4>
+        <div className="space-y-4">
           {option.steps && Array.isArray(option.steps) ? (
             option.steps.map((step, stepIndex) => (
-              <div key={stepIndex} className="border-l-2 border-blue-200 pl-3">
+              <div key={stepIndex} className="border-l-2 border-gray-200 pl-6 relative">
+                <div className="absolute -left-2 top-3 w-3 h-3 bg-white border-2 border-gray-300 rounded-full"></div>
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <p className="text-sm font-medium text-gray-800">
+                    <p className="text-zen-body font-medium mb-2">
                       {stepIndex + 1}. {typeof step === 'string' ? step : step.step}
                     </p>
                     {typeof step === 'object' && step.timeline && (
-                      <p className="text-xs text-gray-500 mt-1">
-                        📅 {step.timeline} | 📦 {step.resources}
+                      <p className="text-zen-small opacity-60 flex items-center space-x-4">
+                        <span className="flex items-center">📅 {step.timeline}</span>
+                        <span className="flex items-center">📦 {step.resources}</span>
                       </p>
                     )}
                   </div>
@@ -161,27 +190,29 @@ function ChoiceCard({ option, index, isSelected, onSelect }: ChoiceCardProps) {
               </div>
             ))
           ) : (
-            <p className="text-sm text-gray-500">暂无步骤信息</p>
+            <p className="text-zen-small opacity-60">暫無步驟信息</p>
           )}
         </div>
       </div>
 
       {/* 投资需求 */}
       {option.investment && (
-        <div className="mb-4">
-          <h4 className="text-sm font-medium text-gray-700 mb-2">💰 投资需求：</h4>
-          <div className="grid grid-cols-3 gap-2">
-            <div className="text-center p-2 bg-gray-50 rounded">
-              <div className="text-lg">⏱️</div>
-              <div className="text-xs text-gray-600">{option.investment.time}</div>
+        <div className="mb-8">
+          <h4 className="text-zen-small font-medium opacity-70 mb-4 flex items-center">
+            <span className="mr-2">💰</span> 投資需求
+          </h4>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="text-center p-4 bg-gray-50/50 rounded-md border border-gray-100">
+              <div className="text-2xl mb-2 opacity-70">⏱️</div>
+              <div className="text-zen-small opacity-80">{option.investment.time}</div>
             </div>
-            <div className="text-center p-2 bg-gray-50 rounded">
-              <div className="text-lg">💵</div>
-              <div className="text-xs text-gray-600">{option.investment.money}</div>
+            <div className="text-center p-4 bg-gray-50/50 rounded-md border border-gray-100">
+              <div className="text-2xl mb-2 opacity-70">💵</div>
+              <div className="text-zen-small opacity-80">{option.investment.money}</div>
             </div>
-            <div className="text-center p-2 bg-gray-50 rounded">
-              <div className="text-lg">🔋</div>
-              <div className="text-xs text-gray-600">{option.investment.energy}</div>
+            <div className="text-center p-4 bg-gray-50/50 rounded-md border border-gray-100">
+              <div className="text-2xl mb-2 opacity-70">🔋</div>
+              <div className="text-zen-small opacity-80">{option.investment.energy}</div>
             </div>
           </div>
         </div>
@@ -274,15 +305,15 @@ function ChoiceCard({ option, index, isSelected, onSelect }: ChoiceCardProps) {
       )}
 
       {/* 选择按钮 */}
-      <div className="pt-4 border-t border-gray-200">
+      <div className="pt-8 border-t border-gray-100/50">
         <button
-          className={`w-full py-3 px-4 rounded-md text-sm font-medium transition-colors ${
+          className={`w-full py-4 px-6 rounded-md text-sm font-medium transition-zen tracking-wide ${
             isSelected
-              ? 'bg-blue-600 text-white shadow-md'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              ? 'bg-gray-900 text-white shadow-zen-md'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow-zen'
           }`}
         >
-          {isSelected ? '✓ 已选择此方案' : '选择此方案'}
+          {isSelected ? '✓ 已選擇此方案' : '選擇此方案'}
         </button>
       </div>
     </div>
