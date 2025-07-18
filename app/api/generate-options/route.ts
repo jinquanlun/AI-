@@ -24,11 +24,8 @@ export async function POST(request: NextRequest) {
     console.log('Silicon Flow API Key exists:', !!siliconFlowKey)
     console.log('Kimi API Key exists:', !!kimiKey)
 
-    // Temporarily use mock data to test model selector UI
     console.log(`Selected model: ${model}`)
-    console.log('Using mock data for testing model selector')
-    const mockResponse = generateMockOptions(content)
-    return NextResponse.json(mockResponse)
+    console.log('Attempting to use real AI API')
 
     if (!siliconFlowKey && !kimiKey) {
       console.error('No API key found in environment')
@@ -37,105 +34,112 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(mockResponse)
     }
 
-    const prompt = `
-你是一位融合心理学与社会学理论的专业决策教练，具备认知偏差识别、情绪调节和价值对齐的专业能力。你的使命是帮助用户做出既理性又符合其价值观的决策。
+    const prompt = `你是一个专业的决策分析师。请根据用户的决策情况，生成3个不同的选择方案。
 
-## 用户决策情境
 用户描述：${content}
 
-## 分析框架（基于心理学与社会学研究）
-请运用以下科学理论进行分析：
+请严格按照以下JSON格式返回，不要添加任何其他文字：
 
-### 心理学维度
-1. **认知偏差识别**：检查锚定效应、确认偏误、损失厌恶、可得性偏差等
-2. **情绪因素评估**：识别决策中的情绪成分，提供情绪调节策略
-3. **价值观对齐**：确保建议与用户长期价值观和目标一致
-4. **行为经济学原理**：运用前景理论、默认效应等优化选择呈现
-
-### 社会学维度
-1. **社会证明效应**：适当引用群体智慧和专家观点增强可信度
-2. **权威影响**：借助专业理论和研究结果支撑建议
-3. **群体认同**：考虑用户所属群体的价值观和行为模式
-
-## 语言策略要求
-1. **共情开场**：先认可用户的困惑和努力，建立心理安全感
-2. **专业权威**：引用心理学研究和专家观点增强可信度
-3. **行动导向**：每个建议都要有具体可执行的SMART目标
-4. **价值强化**：反复连接用户的长期目标和核心价值
-5. **鼓励支持**：使用积极、支持性语言激发内在动机
-
-请以JSON格式输出：
 {
-  "empathy_opening": "共情开场语，认可用户感受和困惑",
-  "bias_analysis": {
-    "identified_biases": ["检测到的认知偏差1", "检测到的认知偏差2"],
-    "bias_warnings": "针对这些偏差的提醒和应对建议"
-  },
-  "emotional_assessment": "用户情绪状态分析和调节建议",
+  "empathy_opening": "理解用户情况的开场白",
   "options": [
     {
       "id": "A",
-      "strategy_type": "积极进取型",
-      "title": "具体而有吸引力的方案名称",
-      "target_user": "最适合此选择的用户特征",
-      "core_logic": "基于心理学理论的核心逻辑",
-      "theoretical_basis": "支撑此选择的心理学/社会学理论",
-      "bias_warning": "此选择可能触发的认知偏差及应对策略",
-      "emotional_impact": "选择对情绪状态的影响评估",
-      "value_alignment": "与常见价值观的匹配程度分析",
-      "social_proof": "相关的群体智慧或专家观点支持",
-      "steps": [
-        {
-          "step": "SMART原则的具体步骤",
-          "timeline": "具体时间框架",
-          "resources": "所需资源",
-          "psychological_tip": "实施过程中的心理调适建议",
-          "success_criteria": "可量化的成功标准"
-        }
-      ],
-      "social_support": "建议寻求的外部支持和资源",
+      "title": "方案A标题",
+      "summary": "方案简要描述",
+      "strategy_type": "策略类型",
+      "core_logic": "核心逻辑说明",
+      "advantages": ["优势1", "优势2", "优势3"],
+      "disadvantages": ["劣势1", "劣势2"],
       "risk_analysis": {
-        "level": "low/medium/high",
-        "objective_risks": ["客观风险1", "客观风险2"],
-        "psychological_barriers": ["心理阻力1", "心理阻力2"],
-        "mitigation_strategies": ["科学的缓解措施1", "科学的缓解措施2"]
+        "level": "low",
+        "main_risks": ["风险1", "风险2"],
+        "mitigation": ["缓解措施1", "缓解措施2"]
       },
       "investment": {
-        "time": "量化时间投入",
-        "money": "量化资金投入",
-        "energy": "量化精力投入"
+        "time": "时间投入",
+        "money": "资金投入",
+        "energy": "精力投入"
       },
       "expected_outcomes": {
-        "short_term": "量化短期预期结果",
-        "long_term": "量化长期预期结果",
-        "success_probability": "基于统计的成功概率（0-1）"
+        "success_probability": "70%"
       },
-      "advantages": ["理论支撑的优势1", "理论支撑的优势2", "理论支撑的优势3"],
-      "disadvantages": ["客观劣势1", "客观劣势2", "客观劣势3"],
-      "best_conditions": "最适用的条件和情境"
+      "steps": [
+        {
+          "step": "具体步骤",
+          "timeline": "时间框架",
+          "resources": "所需资源",
+          "success_criteria": "成功标准"
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "title": "方案B标题",
+      "summary": "方案简要描述",
+      "strategy_type": "策略类型",
+      "core_logic": "核心逻辑说明",
+      "advantages": ["优势1", "优势2", "优势3"],
+      "disadvantages": ["劣势1", "劣势2"],
+      "risk_analysis": {
+        "level": "medium",
+        "main_risks": ["风险1", "风险2"],
+        "mitigation": ["缓解措施1", "缓解措施2"]
+      },
+      "investment": {
+        "time": "时间投入",
+        "money": "资金投入",
+        "energy": "精力投入"
+      },
+      "expected_outcomes": {
+        "success_probability": "60%"
+      },
+      "steps": [
+        {
+          "step": "具体步骤",
+          "timeline": "时间框架",
+          "resources": "所需资源",
+          "success_criteria": "成功标准"
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "title": "方案C标题",
+      "summary": "方案简要描述",
+      "strategy_type": "策略类型",
+      "core_logic": "核心逻辑说明",
+      "advantages": ["优势1", "优势2", "优势3"],
+      "disadvantages": ["劣势1", "劣势2"],
+      "risk_analysis": {
+        "level": "high",
+        "main_risks": ["风险1", "风险2"],
+        "mitigation": ["缓解措施1", "缓解措施2"]
+      },
+      "investment": {
+        "time": "时间投入",
+        "money": "资金投入",
+        "energy": "精力投入"
+      },
+      "expected_outcomes": {
+        "success_probability": "50%"
+      },
+      "steps": [
+        {
+          "step": "具体步骤",
+          "timeline": "时间框架",
+          "resources": "所需资源",
+          "success_criteria": "成功标准"
+        }
+      ]
     }
-  ],
-  "immediate_actions": ["立即可采取的具体行动1", "立即可采取的具体行动2", "立即可采取的具体行动3"],
-  "reflection_questions": ["深度思考问题1", "深度思考问题2", "深度思考问题3"],
-  "motivational_closing": "激励性结语，强化用户能力和价值观"
-}
-
-## 核心要求（基于研究证据）：
-1. **差异化策略**：每个选择必须基于不同的心理学理论，有明显差异化
-2. **行动导向**：所有步骤必须符合SMART原则，具体可执行
-3. **偏差识别**：主动识别并提醒用户可能的认知偏差
-4. **情绪智能**：考虑情绪因素，提供情绪调节建议
-5. **价值对齐**：确保建议与用户长期价值观一致
-6. **社会证明**：适当引用群体智慧和专家观点
-7. **科学依据**：每个建议都要有心理学或社会学理论支撑
-8. **共情沟通**：使用支持性、鼓励性语言激发内在动机
-9. **成功概率**：基于类似情况的实际统计数据
-10. **完整JSON**：确保JSON格式完全正确，使用中文回复
-`
+  ]
+}`
 
     // Create an AbortController for timeout
     const controller = new AbortController()
-    const timeoutId = setTimeout(() => controller.abort(), 30000) // 30 second timeout
+    // No timeout - let AI take as long as needed
+    // const timeoutId = setTimeout(() => controller.abort(), 120000)
 
     let response: Response
 
@@ -248,7 +252,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    clearTimeout(timeoutId)
+    // clearTimeout(timeoutId) // No timeout used
 
     if (!response.ok) {
       const errorText = await response.text()
@@ -265,31 +269,62 @@ export async function POST(request: NextRequest) {
     }
 
     // Parse the AI response as JSON
+    console.log('=== PARSING AI RESPONSE ===')
+    console.log('Raw AI response:', aiResponse.substring(0, 500) + '...')
+
     let parsedResponse
+    let jsonStr = aiResponse
+
     try {
-      // Extract JSON from response if it's wrapped in markdown
-      const jsonMatch = aiResponse.match(/\{[\s\S]*\}/)
-      const jsonStr = jsonMatch ? jsonMatch[0] : aiResponse
+      // Remove markdown code blocks if present
+      if (aiResponse.includes('```json')) {
+        const jsonMatch = aiResponse.match(/```json\s*([\s\S]*?)\s*```/)
+        if (jsonMatch) {
+          jsonStr = jsonMatch[1].trim()
+        }
+      } else if (aiResponse.includes('```')) {
+        const jsonMatch = aiResponse.match(/```\s*([\s\S]*?)\s*```/)
+        if (jsonMatch) {
+          jsonStr = jsonMatch[1].trim()
+        }
+      } else {
+        // Try to extract JSON object
+        const jsonMatch = aiResponse.match(/\{[\s\S]*\}/)
+        if (jsonMatch) {
+          jsonStr = jsonMatch[0].trim()
+        }
+      }
+
+      console.log('Extracted JSON string:', jsonStr.substring(0, 300) + '...')
       parsedResponse = JSON.parse(jsonStr)
+      console.log('=== JSON PARSING SUCCESS ===')
+
     } catch (parseError) {
-      console.error('Failed to parse AI response:', parseError)
-      // Fallback to mock data if parsing fails
-      parsedResponse = generateMockOptions(content)
+      console.error('=== JSON PARSING FAILED ===')
+      console.error('Parse error:', parseError)
+      console.error('Attempted to parse:', jsonStr?.substring(0, 500) + '...')
+
+      // Don't fallback to mock data - throw error to let outer catch handle it
+      const errorMessage = parseError instanceof Error ? parseError.message : String(parseError)
+      throw new Error(`Failed to parse AI response: ${errorMessage}`)
     }
 
+    console.log('=== RETURNING REAL AI RESPONSE ===')
     return NextResponse.json(parsedResponse)
   } catch (error) {
-    console.error('Error generating options:', error)
+    console.error('=== ERROR GENERATING OPTIONS ===')
+    console.error('Error type:', error instanceof Error ? error.constructor.name : typeof error)
+    console.error('Error message:', error instanceof Error ? error.message : String(error))
+    console.error('Full error:', error)
 
-    // Check if it's a timeout error
-    if (error instanceof Error && error.name === 'AbortError') {
-      console.error('API request timed out, falling back to mock data')
-    }
-
-    // Return mock data as fallback
-    const mockResponse = generateMockOptions(content ?? 'fallback decision')
-
-    return NextResponse.json(mockResponse)
+    // Return error response instead of mock data
+    return NextResponse.json(
+      {
+        error: 'Failed to generate AI response',
+        details: error instanceof Error ? error.message : String(error)
+      },
+      { status: 500 }
+    )
   }
 }
 

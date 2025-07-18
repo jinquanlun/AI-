@@ -46,7 +46,7 @@ export function AIChoicePanel({
       <div className="space-y-6 lg:space-y-8 pb-8">
         {options.map((option, index) => (
           <ChoiceCard
-            key={option.id}
+            key={index}
             option={option}
             index={index}
             isSelected={selectedOption === index}
