@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { AIOption } from '@/lib/supabase'
 
 export async function POST(request: NextRequest) {
-  let content: string
+  let content: string = ''
   let model: string = 'kimi'
 
   try {
@@ -287,7 +287,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Return mock data as fallback
-    const mockResponse = generateMockOptions(content || 'fallback decision')
+    const mockResponse = generateMockOptions(content ?? 'fallback decision')
 
     return NextResponse.json(mockResponse)
   }

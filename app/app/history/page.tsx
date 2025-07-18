@@ -129,7 +129,7 @@ export default function HistoryPage() {
           <div className="flex items-center space-x-4">
             <select
               value={filterStatus}
-              onChange={(e) => setFilterStatus(e.target.value as any)}
+              onChange={(e) => setFilterStatus(e.target.value as 'all' | 'selected' | 'unselected' | 'completed')}
               className="px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent bg-white/80 backdrop-blur-sm"
             >
               <option value="all">全部決策</option>
