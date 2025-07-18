@@ -52,7 +52,7 @@ export default function LandingPage() {
               从直观决策到结构化思考
             </p>
             <p className="text-base text-gray-500 leading-relaxed italic">
-              "每个选择都是一次与未来的对话，每个决定都是一次对自我的探索"
+              "              &ldquo;每个选择都是一次与未来的对话，每个决定都是一次对自我的探索&rdquo;"
             </p>
           </div>
 
@@ -89,7 +89,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
             <div className="space-y-6 animate-slide-in-left">
               <blockquote className="text-gray-700 leading-relaxed p-6 border-l-2 border-gray-200 hover:border-gray-400 transition-smooth hover-lift">
-                <p className="mb-4">"决策不是关于找到完美的答案，而是关于理解自己真正想要什么。"</p>
+                <p className="mb-4">&ldquo;决策不是关于找到完美的答案，而是关于理解自己真正想要什么。&rdquo;</p>
                 <footer className="text-sm text-gray-500">— 决策心理学</footer>
               </blockquote>
 
@@ -100,7 +100,7 @@ export default function LandingPage() {
 
             <div className="space-y-6 animate-slide-in-right">
               <blockquote className="text-gray-700 leading-relaxed p-6 border-l-2 border-gray-200 hover:border-gray-400 transition-smooth hover-lift">
-                <p className="mb-4">"最好的决策来自于对自己诚实，而不是对他人的期待。"</p>
+                <p className="mb-4">&ldquo;最好的决策来自于对自己诚实，而不是对他人的期待。&rdquo;</p>
                 <footer className="text-sm text-gray-500">— 自我认知理论</footer>
               </blockquote>
 

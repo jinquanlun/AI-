@@ -120,7 +120,7 @@ function IntroductionSection() {
 
       <blockquote className="border-l-4 border-gray-300 pl-6 py-4 bg-gray-50 rounded-r-lg hover-lift transition-smooth">
         <p className="text-gray-700 italic leading-relaxed mb-2">
-          "每個選擇都是一次與未來的對話，每個決定都是一次對自我的探索"
+          "          &ldquo;每個選擇都是一次與未來的對話，每個決定都是一次對自我的探索&rdquo;"
         </p>
         <footer className="text-sm text-gray-500">— Decision Compass 設計理念</footer>
       </blockquote>
@@ -159,7 +159,7 @@ function PhilosophySection() {
           <div className="p-6 border border-gray-200 rounded-lg hover-lift transition-smooth">
             <h3 className="text-lg font-medium text-gray-900 mb-4">決策心理學</h3>
             <blockquote className="text-gray-700 leading-relaxed mb-4">
-              "決策不是關於找到完美的答案，而是關於理解自己真正想要什麼。"
+              "              &ldquo;決策不是關於找到完美的答案，而是關於理解自己真正想要什麼。&rdquo;"
             </blockquote>
             <p className="text-sm text-gray-600">
               每個人都有直覺，但很少人知道如何傾聽它。我們幫助你將模糊的感受轉化為清晰的選擇。
@@ -169,7 +169,7 @@ function PhilosophySection() {
           <div className="p-6 border border-gray-200 rounded-lg hover-lift transition-smooth">
             <h3 className="text-lg font-medium text-gray-900 mb-4">自我認知理論</h3>
             <blockquote className="text-gray-700 leading-relaxed mb-4">
-              "最好的決策來自於對自己誠實，而不是對他人的期待。"
+              "              &ldquo;最好的決策來自於對自己誠實，而不是對他人的期待。&rdquo;"
             </blockquote>
             <p className="text-sm text-gray-600">
               在資訊爆炸的時代，我們需要的不是更多選擇，而是更好的判斷。
@@ -278,7 +278,7 @@ function UsageSection() {
             <div className="p-6 border border-gray-200 rounded-lg hover-lift transition-smooth">
               <h3 className="font-medium text-gray-900 mb-3">✅ 好的輸入範例</h3>
               <div className="bg-gray-50 p-4 rounded text-sm text-gray-700 leading-relaxed mb-3">
-                "我正在考慮是否要接受一個新的自由接案項目。這個項目報酬不錯，但時間緊迫，可能會影響我現有的工作安排。我擔心品質無法保證，但又不想錯過這個機會..."
+                "                &ldquo;我正在考慮是否要接受一個新的自由接案項目。這個項目報酬不錯，但時間緊迫，可能會影響我現有的工作安排。我擔心品質無法保證，但又不想錯過這個機會...&rdquo;"
               </div>
               <p className="text-xs text-gray-600">
                 包含了情況描述、考慮因素、擔憂和期望，給AI足夠的分析材料。
@@ -288,7 +288,7 @@ function UsageSection() {
             <div className="p-6 border border-gray-200 rounded-lg hover-lift transition-smooth">
               <h3 className="font-medium text-gray-900 mb-3">❌ 避免的輸入</h3>
               <div className="bg-gray-50 p-4 rounded text-sm text-gray-700 leading-relaxed mb-3">
-                "要不要接案？"
+                "                &ldquo;要不要接案？&rdquo;"
               </div>
               <p className="text-xs text-gray-600">
                 過於簡單，缺乏背景資訊，AI無法提供有意義的建議。
